@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   from_css_color: ^2.0.0
   get: ^4.6.6
+  google_fonts: ^6.2.1
+  qrscan: ^0.3.3
 
 
 dev_dependencies:
