@@ -14,7 +14,7 @@ class AssetsDetail extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
         child: Container(
-          decoration: BoxDecoration(border: Border.all()),
+          // decoration: BoxDecoration(border: Border.all()),
           child: ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -26,7 +26,7 @@ class AssetsDetail extends StatelessWidget {
                 },
                 child: const CustomOpname(
                   icon: Icons.edit,
-                  iconColor: Colors.black,
+                  iconColor: Colors.white,
                   kode: "02022001",
                   merk: "Notebook A",
                   condition: "Good",

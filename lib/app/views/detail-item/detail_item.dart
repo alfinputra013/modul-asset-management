@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modul_asset_management/core/theme.dart';
+import 'package:modul_asset_management/widget/app_bar.dart';
 import 'package:modul_asset_management/widget/button.dart';
 import 'package:modul_asset_management/widget/form.dart';
 
@@ -14,7 +15,12 @@ class DetailItem extends StatefulWidget {
 }
 
 class _DetailItemState extends State<DetailItem> {
-  String dropDownValue = 'Pilih Status';
+  final status = ["On Progress", "Done"];
+  final spareport = ['Item 1', 'Item 2', 'Item 3', 'Item 4', "Item 5"];
+  final items = ['Yes', 'No'];
+  String? valueStatus;
+  String? valueSpareport;
+  String? valueItems;
   @override
   Widget build(BuildContext context) {
     Future<void> selectedDate(BuildContext context) async {
@@ -25,46 +31,55 @@ class _DetailItemState extends State<DetailItem> {
           initialDate: DateTime.now());
     }
 
-    return Scaffold(
-      backgroundColor: whiteColor,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        title: GestureDetector(
-          onTap: () {
-           Get.back();
-          },
-          child: Row(
-            children: [
-              Icon(
-                Icons.arrow_back_ios_new,
-                color: greyFont,
-              ),
-              const SizedBox(
-                width: 3,
-              ),
-              Text(
-                "Back",
-                style: GoogleFonts.poppins(
-                  fontSize: 18,
-                ),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: Text(
-              "Asset Maintenance",
-              style: GoogleFonts.poppins(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: orangeMain,
-              ),
+    DropdownMenuItem<String> buildMenuItemStatus(String item) =>
+        DropdownMenuItem(
+          value: item,
+          child: Text(
+            item,
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
             ),
           ),
-        ],
+        );
+
+    DropdownMenuItem<String> buildMenuItemSparepart(String item) =>
+        DropdownMenuItem(
+          value: item,
+          child: Text(
+            item,
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        );
+
+    DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+          value: item,
+          child: Text(
+            item,
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        );
+
+    return Scaffold(
+      backgroundColor: whiteColor,
+      appBar: AppBarGlobal(
+        title: "Asset Maintenance",
+        centerTitle: false,
+        backgroundColor: orangeMain,
+        leading: GestureDetector(
+          onTap: () => Get.back(),
+          child: Icon(
+            Icons.arrow_back_ios_new,
+            color: whiteColor,
+            size: 20,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -83,8 +98,9 @@ class _DetailItemState extends State<DetailItem> {
               const SizedBox(
                 height: 5,
               ),
-              const EditTextField(
+              const CustomTextField(
                 hintText: "Cleansing Hardisk",
+                enabled: false,
               ),
               const SizedBox(
                 height: 15,
@@ -97,8 +113,9 @@ class _DetailItemState extends State<DetailItem> {
               const SizedBox(
                 height: 5,
               ),
-              const EditTextField(
+              const CustomTextField(
                 hintText: "Preventive Maintenance",
+                enabled: false,
               ),
               const SizedBox(
                 height: 15,
@@ -111,7 +128,8 @@ class _DetailItemState extends State<DetailItem> {
               const SizedBox(
                 height: 5,
               ),
-              const EditTextField(
+              const CustomTextField(
+                enabled: false,
                 hintText: "Pembersihan Hardisk",
               ),
               const SizedBox(
@@ -125,7 +143,8 @@ class _DetailItemState extends State<DetailItem> {
               const SizedBox(
                 height: 5,
               ),
-              const EditTextField(
+              const CustomTextField(
+                enabled: false,
                 hintText: "10/12/2022",
               ),
               const SizedBox(
@@ -139,8 +158,9 @@ class _DetailItemState extends State<DetailItem> {
               const SizedBox(
                 height: 5,
               ),
-              const EditTextField(
+              const CustomTextField(
                 hintText: "IT",
+                enabled: false,
               ),
               const SizedBox(
                 height: 15,
@@ -153,26 +173,36 @@ class _DetailItemState extends State<DetailItem> {
               const SizedBox(
                 height: 5,
               ),
-              const SizedBox(
-                width: double.infinity,
-                height: 35,
-                child: TextField(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(top: 5, left: 5),
-                    hintText: "Select Status",
-                    filled: true,
-                    fillColor: Colors.white,
-                    enabledBorder: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                      ),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color(0xFFD9D9D9),
                     ),
-                    suffixIcon: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 20,
+                    borderRadius: BorderRadius.circular(10)),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                child: DropdownButton<String>(
+                  hint: Text(
+                    "Select Status Here",
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
+                  icon: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 16,
+                    color: greyColor,
+                  ),
+                  isExpanded: true,
+                  value: valueStatus,
+                  elevation: 1,
+                  borderRadius: BorderRadius.circular(10),
+                  dropdownColor: Colors.white,
+                  items: status.map(buildMenuItemStatus).toList(),
+                  onChanged: (valueStatus) =>
+                      setState(() => this.valueStatus = valueStatus),
                 ),
               ),
               const SizedBox(
@@ -190,28 +220,56 @@ class _DetailItemState extends State<DetailItem> {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.76,
-                    height: 35,
+                    height: 45,
                     child: TextField(
                       readOnly: true,
                       onTap: () {
                         selectedDate(context);
                       },
-                      decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.only(top: 5, left: 5),
-                          hintText: "Select date",
-                          filled: true,
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                            color: Colors.black,
-                          ))),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(top: 5, left: 10),
+                        hintText: "Select date Here",
+                        hintStyle: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        filled: true,
+                        border: InputBorder.none,
+                        enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Color(0xFFD9D9D9)),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Color(0xFFD9D9D9)),
+                        ),
+                        fillColor: Colors.white,
+                      ),
                     ),
                   ),
                   const SizedBox(
                     width: 5,
                   ),
-                  const Icon(Icons.calendar_month, size: 32),
+                  Expanded(
+                    child: InkWell(
+                       onTap: () {
+                        selectedDate(context);
+                      },
+                      child: Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                          color: orangeMain,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child:  Center(
+                          child: Icon(
+                            Icons.calendar_month,
+                            color: whiteColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(
@@ -225,8 +283,9 @@ class _DetailItemState extends State<DetailItem> {
               const SizedBox(
                 height: 5,
               ),
-              const EditTextField(
+              const CustomTextField(
                 hintText: "Replace Sparepart",
+                enabled: false,
               ),
               const SizedBox(
                 height: 15,
@@ -239,51 +298,71 @@ class _DetailItemState extends State<DetailItem> {
               const SizedBox(
                 height: 5,
               ),
-              const SizedBox(
-                width: double.infinity,
-                height: 35,
-                child: TextField(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(top: 5, left: 5),
-                    hintText: "Yes",
-                    filled: true,
-                    fillColor: Colors.white,
-                    enabledBorder: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                      ),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color(0xFFD9D9D9),
                     ),
-                    suffixIcon: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 20,
+                    borderRadius: BorderRadius.circular(10)),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                child: DropdownButton<String>(
+                  hint: Text(
+                    "Select Here",
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
+                  icon: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 16,
+                    color: greyColor,
+                  ),
+                  isExpanded: true,
+                  value: valueItems,
+                  elevation: 1,
+                  borderRadius: BorderRadius.circular(10),
+                  dropdownColor: Colors.white,
+                  items: items.map(buildMenuItem).toList(),
+                  onChanged: (valueItems) =>
+                      setState(() => this.valueItems = valueItems),
                 ),
               ),
               const SizedBox(
-                height: 5,
+                height: 10,
               ),
-              const SizedBox(
-                width: double.infinity,
-                height: 35,
-                child: TextField(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(top: 5, left: 5),
-                    hintText: "Spareport Component",
-                    filled: true,
-                    fillColor: Colors.white,
-                    enabledBorder: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                      ),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color(0xFFD9D9D9),
                     ),
-                    suffixIcon: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 20,
+                    borderRadius: BorderRadius.circular(10)),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                child: DropdownButton<String>(
+                  hint: Text(
+                    "Select Spareport Component",
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
+                  icon: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 16,
+                    color: greyColor,
+                  ),
+                  isExpanded: true,
+                  value: valueSpareport,
+                  elevation: 1,
+                  borderRadius: BorderRadius.circular(10),
+                  dropdownColor: Colors.white,
+                  items: spareport.map(buildMenuItem).toList(),
+                  onChanged: (valueSpareport) =>
+                      setState(() => this.valueSpareport = valueSpareport),
                 ),
               ),
               const SizedBox(
@@ -297,28 +376,11 @@ class _DetailItemState extends State<DetailItem> {
               const SizedBox(
                 height: 5,
               ),
-              const SizedBox(
-                width: double.infinity,
-                height: 35,
-                child: TextField(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(top: 5, left: 5),
-                    hintText: "Rp. 500.000",
-                    filled: true,
-                    fillColor: Colors.white,
-                    enabledBorder: OutlineInputBorder( borderSide: BorderSide(
-                        color: Colors.black,
-                      ),),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 5,
+              const CustomTextField(
+                hintText: "Input Cost Here",
+                enabled: true,
+                keyboardType: TextInputType.phone,
+                
               ),
               const SizedBox(
                 height: 20,
@@ -326,7 +388,7 @@ class _DetailItemState extends State<DetailItem> {
               CustomButton(
                 onPressed: () {},
                 text: "Update",
-                color: Colors.blueAccent,
+                color: orangeMain,
                 height: 45,
                 width: double.infinity,
               ),
