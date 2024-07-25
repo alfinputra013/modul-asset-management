@@ -14,20 +14,20 @@ class NotesAll extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TextField(
+             TextField(
               keyboardType: TextInputType.text,
               maxLines: 4,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.grey,
-                    width: 1.3,
+                    color: Color(0xFFD9D9D9),
+                    width: 0.8,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.blueAccent,
-                    width: 1.3,
+                    color:orangeMain,
+                    width: 0.8,
                   ),
                 ),
               ),
@@ -38,11 +38,13 @@ class NotesAll extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: CustomButton(
+
                 onPressed: () {},
                 text: "Save",
-                color: Colors.blueAccent,
-                height: 35,
-                width: 150,
+              
+                color: orangeMain,
+                height: 45,
+                width: double.infinity,
               ),
             )
           ],

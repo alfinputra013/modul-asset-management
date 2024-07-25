@@ -28,8 +28,9 @@ class StockOpname extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      const EditTextField(
+                      const CustomTextField(
                         hintText: "SO HO 01/04/2022",
+                        enabled: false,
                       ),
                       const SizedBox(
                         height: 15,
@@ -42,8 +43,9 @@ class StockOpname extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      const EditTextField(
+                      const CustomTextField(
                         hintText: "Head Office",
+                        enabled: false,
                       ),
                       SizedBox(
                         height: 15,
@@ -56,8 +58,9 @@ class StockOpname extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      const EditTextField(
+                      const CustomTextField(
                         hintText: "All Position",
+                        enabled: false,
                       ),
                       const SizedBox(
                         height: 15,
@@ -70,8 +73,9 @@ class StockOpname extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      const EditTextField(
+                      const CustomTextField(
                         hintText: "10/12/2022",
+                        enabled: false,
                       ),
                       SizedBox(
                         height: 15,
@@ -84,8 +88,9 @@ class StockOpname extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      const EditTextField(
+                      const CustomTextField(
                         hintText: "Laptop",
+                        enabled: false,
                       ),
                       const SizedBox(
                         height: 15,
@@ -98,7 +103,7 @@ class StockOpname extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      const EditTextField(
+                      const CustomTextField(
                         hintText: "Cahyo",
                       ),
                     ],
@@ -111,7 +116,7 @@ class StockOpname extends StatelessWidget {
               child: CustomButton(
                 text: "Update",
                 onPressed: () {},
-                color: Colors.blueAccent,
+                color: orangeMain,
                 width: double.infinity,
                 height: 45,
               ),
