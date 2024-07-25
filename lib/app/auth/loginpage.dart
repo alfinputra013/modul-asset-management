@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:modul_asset_management/app/views/homepage.dart';
 import 'package:modul_asset_management/core/theme.dart';
 import 'package:modul_asset_management/routes/app_pages.dart';
 import 'package:modul_asset_management/widget/button.dart';
@@ -56,7 +55,10 @@ class _LoginPageState extends State<LoginPage> {
                   style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w500, fontSize: 14),
                 ),
-                const CustomTextField(),
+                SizedBox(height: 4),
+                const CustomTextField(
+                  hintText: "Enter Email",
+                ),
               ],
             ),
             const SizedBox(
@@ -70,7 +72,9 @@ class _LoginPageState extends State<LoginPage> {
                   style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w500, fontSize: 14),
                 ),
+                 SizedBox(height: 4),
                 CustomTextField(
+                  hintText: "Enter Password",
                   obscureText: _obscureText,
                   onSuffixIconPressed: _toggleVisibility,
                   suffixIcon:
@@ -87,8 +91,8 @@ class _LoginPageState extends State<LoginPage> {
                 Get.toNamed(Routes.HOME);
               },
               text: "Login",
-              width: MediaQuery.of(context).size.width * 0.6,
-              height: 35,
+              width: MediaQuery.of(context).size.width,
+              height: 45,
               color: orangeMain,
             ),
           ],
